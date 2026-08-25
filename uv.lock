@@ -7,7 +7,7 @@ resolution-markers = [
 ]
 
 [[package]]
-name = "<name of my project>"
+name = "test-alert"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

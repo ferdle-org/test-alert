@@ -5,7 +5,33 @@
 
 version: 2
 updates:
-  - package-ecosystem: "uv" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "uv"
+    directory: "/"
+    exclude-paths:
+      - "requirements.txt"
+      - "dev-requirements.txt"
+    cooldown:
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
     schedule:
       interval: "weekly"
+      day: "sunday"
+      time: "01:00"
+      timezone: "America/Toronto"
+    allow:
+      # Permet aux dépendances directes et transitives d'être mises à jour.
+      - dependency-type: "all"
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    groups:
+      python-minor:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
